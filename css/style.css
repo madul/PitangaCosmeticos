@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+:root{
+    --color-logo1: #FFB8AA;
+    --color-logo2: #FFF8F7;
+    --color-logo3: #FFE9E5;
+    --color-pitanga: #D43019;
+    --color-pitanga-preta: #4F1711;
+    --color-lines: #b3b3b3;
+
+    --font-title: Charm, cursive;
+    --font-pattern: Montserrat, sans-serif;
+    --font-pattern2: ABeeZee, sans-serif;
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-pattern);
+  text-align: center;
+}
+
+html,body{
+    background-color: var(--color-logo2);
+}
+#bodyWrapper{
+    position: relative;
+    min-height: 100vh;
+}
+/** HEADER **/
+header{
+    position: abolute;
+    top: 0;
+    width: 100%;
+}
+
+nav{
+    background-color:var(--color-logo3);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-align: center;
+}
+
+nav img{
+    width: 120px;
+    padding-top: 5px;
+}
+
+nav div{
+    margin: auto;
+}
+
+nav a{
+    text-decoration: none;
+    color: var(--color-pitanga-preta);
+    font-size: 24px;
+}
+/** END OF HEADER **/
+
+/** MAIN **/
+
+.sectionTitle{
+    color: #638C35;
+    font-weight: bold;
+    font-size: 3rem;
+    font-family: var(--font-title);
+    text-align: left;
+    margin: 0.5rem 1rem;
+
+    border-bottom: 1px solid var(--color-lines);
+}
+
+#promo{
+    text-align: center;
+    margin-top: 2rem;
+    padding-bottom: 8rem;
+}
+
+#promo img{
+    width: 80%;
+}
+/** END OF MAIN **/
+
+/** FOOTER **/
+.footer{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    padding: 2rem ;
+    height: 8rem;
+
+}
+
+#img_formas_pagamento{
+    width: 200px;
+}
+#formas_pagamento p{
+    color: var(--color-pitanga-preta);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/** END OF FOOTER **/

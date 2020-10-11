@@ -1,0 +1,24 @@
+:root{
+    --color-logo1: #FFB8AA;
+    --color-logo2: #FFF8F7;
+    --color-logo3: #FFE9E5;
+    --color-pitanga: #D43019;
+    --color-pitanga-preta: #4F1711;
+    --color-green-handle: #638C35;
+    --color-line: #b3b3b3;
+
+    --font-title: Charm, cursive;
+    --font-pattern: Montserrat, sans-serif;
+    --font-pattern2: ABeeZee, sans-serif;
+
+}
+
+#stores{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 8rem;
+    margin: 2rem 0;
+}

@@ -6,6 +6,7 @@
     --color-logo3: #FFE9E5;
     --color-pitanga: #D43019;
     --color-pitanga-preta: #4F1711;
+    --color-green-handle: #638C35;
     --color-lines: #b3b3b3;
 
     --font-title: Charm, cursive;
@@ -33,7 +34,6 @@ html,body{
 }
 /** HEADER **/
 header{
-    position: abolute;
     top: 0;
     width: 100%;
 }
@@ -41,8 +41,9 @@ header{
 nav{
     background-color:var(--color-logo3);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
+    z-index: 10000;
 }
 
 nav img{
@@ -54,12 +55,198 @@ nav div{
     margin: auto;
 }
 
-nav a{
+nav a,nav p{
     text-decoration: none;
     color: var(--color-pitanga-preta);
     font-size: 24px;
 }
+
+#username{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items:center;
+    width:90%;
+}
+#exit-icon{
+    width: 2rem;
+}
 /** END OF HEADER **/
+#title{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--color-lines);
+    align-items:center;
+}
+/** CART FLOATTING BUTTON **/
+#shop-cart-float-btn{
+    right: 2rem;
+    top: 10px;
+    position: absolute;
+    padding: 8px;
+    z-index: 100;
+    
+    border-radius: 50%;
+    border: 1px solid var(--color-lines);
+    box-shadow: 2px 4px 8px #888888;
+    background-color: var(--color-logo1);
+
+}
+#shop-cart-float-btn img{
+    width: 2.5rem;
+}
+/** END OF CART FLOATTING BUTTON **/
+
+/** SHOPPING CART **/
+#shopping-list{
+    width: 0;
+    right: 0;
+    top:65px;
+    bottom: 0;
+    position: fixed;
+    z-index: 200;
+    background-color: var(--color-logo3);
+
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  
+}
+#shopping-list #headerCart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#shopping-list #headerCart p{
+    font-size:1.25rem;
+}
+#shopping-list .titleCart{
+    color: var(--color-pitanga);
+    font-weight: bold;
+    margin: 10px 0;
+}
+#shopping-list #headerCart #closeCart{
+    top:0;
+    right: 0;
+    position: absolute;
+    margin: 5px;
+    width: 20px;
+}
+
+#shopping-list .itemsList{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content:space-evenly;
+    padding: 3rem 0 0 0;
+    margin-bottom: 120px;
+    overflow: auto;
+}
+#shopping-list .itemsList .itemCart{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    width: 90%;
+    justify-content:center;
+    align-items: center;
+    border: 1px solid var(--color-lines);
+    padding: 5px;
+    margin: 5px;
+}
+#shopping-list .itemsList .itemCart .imgCart{
+    background: white;
+    width:80px;
+    height:80px;
+    border: 1px solid var(--color-lines);
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 0.5rem;
+}
+#shopping-list .itemsList .itemCart .numItensCart{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+}
+#shopping-list .itemsList .itemCart .numItensCart .number{
+    background: white;
+    width: 2rem;
+    border: 1px solid var(--color-lines);
+}
+#shopping-list .itemsList .itemCart .numItensCart button{
+    width:1.5rem;
+    font-size: 1rem;
+    background: white;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid var(--color-lines);
+}
+#shopping-list .itemsList .itemCart .numItensCart .minus{
+    border-radius: 5px 0 0 5px;
+}
+#shopping-list .itemsList .itemCart .numItensCart .plus{
+    border-radius: 0 5px 5px 0;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
+    height:100%;
+    margin: 0 5px;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .prodNameCart{
+    font-weight: bold;
+    text-align:left;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .prodContentCart{
+    font-size: .75rem;
+    color: gray;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .priceItemCart{
+    font-size: 0.9rem;
+}
+#totalCart{
+    bottom: 0px;
+    position: absolute;
+    background: var(--color-logo2);
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid var(--color-lines);
+}
+#totalCart .infoTotalCart{
+    width: 90%;
+}
+#totalCart .infoTotalCart div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+
+}
+#totalCart button{
+    background: var(--color-logo1);
+    border: 1px solid var(--color-lines);
+    border-radius: 20px;
+    width: 80%;
+    height: 2rem;
+    color: var(--color-logo2);
+    font-size: 1.25rem;
+    bottom: 0;
+    margin:5px;
+    position: absolute;
+
+    
+}
+/** END OF SHOPPING CART **/
+
 
 /** MAIN **/
 
@@ -71,7 +258,6 @@ nav a{
     text-align: left;
     margin: 0.5rem 1rem;
 
-    border-bottom: 1px solid var(--color-lines);
 }
 
 #promo{
@@ -107,3 +293,60 @@ nav a{
 }
 
 /** END OF FOOTER **/
+
+/** LOGIN MODAL **/
+#login{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-evenly;
+    position:fixed;
+    right: 10px;
+    z-index:1000;
+
+    width: 250px;
+    height: 300px;
+    background-color: var(--color-logo3);
+    border-radius: 20px;
+    border: 1px solid var(--color-lines);
+}
+#login div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    
+}
+#login div *{
+    margin: 5px;
+}
+#login div input{
+    border-radius: 10px;
+    border: 1px solid var(--color-lines);
+    width: 11rem;
+    height: 2rem;
+}
+
+#login #buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#login button{
+    background-color: var(--color-logo1);
+    border-radius: 10px;
+    border: 1px solid var(--color-lines);
+    width:11rem;
+    height:2rem;
+    font-size:1rem;
+    color:var(--color-logo2);
+    margin: 10px 0;
+}
+
+#messageBack{
+    display: 'none';
+}
+/** END OF LOGIN MODAL **/
+

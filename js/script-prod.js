@@ -1,9 +1,7 @@
 
 let colorPitanga = 'rgb(212, 48, 25)';
 
-console.log(myData);
-
-function onMouse(element){
+function onMouseP(element){
     
     element.style.cursor === 'pointer' ? 
     element.style.cursor = 'auto' :
@@ -30,8 +28,12 @@ function pointer(element){
 }
 
 function select(category){
+    let order = document.getElementById("orderDoc");
+    order.style.display = 'none';
     let products = document.getElementsByClassName('product');
+    let showcase = document.getElementById('showcase');
     
+    showcase.style.display = 'grid';
     if (category === 'todos')
         Array.prototype.forEach.call(products,product => product.style.display ='grid');
     else
@@ -60,45 +62,104 @@ function montarModal(element){
     while(modalText.hasChildNodes()){
         modalText.removeChild(modalText.firstChild);
     }
-    console.log(id);
 
-    let product = myData.filter(obj => obj.cod == id)[0];
-    console.log(product);
-
+    let product = myData.filter(obj => obj.productID == id)[0];
+   
     let image = document.createElement('img');
-    image.src = product.image;
-    image.alt = product.alt;   
+    image.src = "../images/" + product.imageURL;
+    image.alt = product.name;   
     modalImage.appendChild(image);
 
-    console.log(product.titulo);
     let title = document.createElement('P');
     title.className = 'modalTitle';
-    title.innerHTML= product.titulo;
+    title.innerHTML= product.name;
     modalText.appendChild(title);
 
     let info = document.createElement('P');
     info.className = 'modalProdInfo';
-    info.innerHTML= product.linha + " - " + product.conteudo;
+    info.innerHTML= product.range + " - " + product.content;
     modalText.appendChild(info);
 
     let modalDescription = document.createElement('div');
     modalDescription.className = 'modalProdDescription';
 
     let description = document.createElement('P');
-    description.innerHTML = product.descricao;
+    description.innerHTML = product.description;
     modalDescription.appendChild(description);
 
+    //get first line of details to add bold style
+    let firstLine = product.details.substr(0,product.details.indexOf('<br'));
+    firstLine = '<strong>'.concat(firstLine,'</strong>');
     let benefits = document.createElement('P');
-    benefits.innerHTML = product.subDescricao;
-    benefits.style.fontWeight = 'bold';
+    benefits.innerHTML = firstLine.concat(product.details.slice(product.details.indexOf('<br')));
     modalDescription.appendChild(document.createElement('br'));
     modalDescription.appendChild(benefits);
 
-    product.beneficios.forEach(item =>{
-        let benefit = document.createElement('P');
-        benefit.innerHTML = item;
-        modalDescription.appendChild(benefit);
+    
+    modalText.appendChild(modalDescription);    
+}
+
+/** ADD ITEM TO CART **/
+function order(){
+    let showcase = document.getElementById('showcase');
+    let orderDoc = document.getElementById('orderDoc');
+    let orderModule = document.getElementById('orderModule');
+    let orderPlaced = document.getElementById('orderPlaced');
+
+    showcase.style.display = 'none';
+    orderDoc.style.display = 'flex';
+    orderModule.style.display = 'flex';
+    orderPlaced.style.display = 'none';
+
+    if (orderPlaced.hasChildNodes())
+        orderPlaced.removeChild(orderPlaced.childNodes[0]);
+}; 
+
+/** ORDER FORM**/
+function updateValueOrder(){
+    let totalPrice = document.getElementById('totalPriceOrder');
+    let products = myData;
+    let total = 0;
+
+    for(product of products){
+        let element = document.getElementById(`qtd-prod-product-${product['productID']}`);
+        total += element.value * product['currentPrice'];
+    }
+    totalPrice.innerHTML = `R$ ${total.toFixed(2)}`;
+}
+
+ $(function(){
+    $('#form-order').on('submit', function(event){
+        event.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: '../php/actions/place-order.php',
+            data: $(this).serialize(),
+            success: function(data){
+                let paragraph = document.createElement('P');
+                paragraph.innerHTML = data;
+                
+                $("#orderModule").css("display", "none");
+                $("#orderPlaced").append(paragraph);
+                $("#orderPlaced").css("display", "block");
+
+                clearForms("form-order");
+            }
+        });
+    });
+}); 
+
+function clearForms(id){
+    let forms = document.getElementById(id);
+    let inputs = forms.getElementsByTagName("input");
+
+    Array.prototype.forEach.call(inputs, (input) =>{
+        if(input.type == "number")
+            input.value = "0";
+        else
+            input.value = "";
+
     });
 
-    modalText.appendChild(modalDescription);    
+
 }

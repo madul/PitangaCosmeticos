@@ -1,30 +1,17 @@
 <!DOCTYPE html>
+<?php require('./actions/connectionBD.php'); ?>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>Contato - Full Stack Eletros</title>
+        <title>Pitanga Cosméticos</title>
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/style-contatos.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <!-- Início do Menu-->
         <header id="menu">
-            <nav id="nav-bar">
-                <div>
-                    <a href="index.html">
-                        <img id="logo" src="../images/pitanga_logo4_menu.png" alt="Pitanga logo">
-                    </a>
-                </div>
-                <div>
-                    <a href="produtos.html">Produtos</a>
-                </div>
-                <div>
-                    <a href="lojas.html">Nossas Lojas</a>
-                </div>
-                <div>
-                    <a href="contatos.html">Fale Conosco</a>
-                </div>
-            </nav>
+            <?php require('../php/includes/menubar.php'); ?>
         </header>
         <!-- Fim do Menu-->
         
@@ -58,17 +45,8 @@
                 </form>        
             </div>
         </div>
-        <!-- Rodapé-->
-        <footer class="footer">
-            <div id="formas_pagamento">
-                <p>Formas de Pagamento</p>
-                <img id="img_formas_pagamento" src="../images/formas_pagamento2.jpg" alt="Formas de pagamento" width="300px">
-            </div>
-            <div id="recode">
-                <p>&copy; Recode Pro / Maria Eduarda Leme</p>
-            </div>
-        </footer>
-        <!-- Fim do Rodapé-->
 
+        <!-- FOOTER -->
+        <?php require_once("./includes/footer.php"); ?>
     </body>
 </html>

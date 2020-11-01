@@ -1,0 +1,143 @@
+:root{
+  --color-logo1: #FFB8AA;
+  --color-logo2: #FFF8F7;
+  --color-logo3: #FFE9E5;
+  --color-pitanga: #D43019;
+  --color-pitanga-preta: #4F1711;
+  --color-green-handle: #638C35;
+  --color-line: #b3b3b3;
+
+  --font-title: Charm, cursive;
+  --font-pattern: Montserrat, sans-serif;
+  --font-pattern2: ABeeZee, sans-serif;
+
+}
+
+#icon-container{
+  grid-column: 4;
+}
+
+#exit-icon{
+  width: 2rem;
+}
+
+#sideMenu{
+  border-right: 1px solid var(--color-line);    
+}
+
+#sideMenu li{
+  text-align: left;
+  padding: 0.25rem 0;
+  list-style-type: none;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+
+  margin: 10px;
+  padding: 10px;
+}
+
+#form-cadastro{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: space-between;
+}
+
+#form1, #form2{
+  text-align: left;
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 40%;
+}
+
+#form1 label, #form2 label{
+  margin-bottom:-10px;
+}
+
+input{
+  width: 100%;
+  height: 2rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-line);
+  text-align: left;
+  padding-left: 0.25rem;
+}
+
+#form-cadastro textarea{
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  resize: vertical;
+  text-align: left;
+  padding-left: 0.25rem;
+  width: 100%; 
+  height:100px
+}
+
+button{
+  width: 160px;
+  height: 2rem;
+  margin: 40px 0px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background-color: var(--color-logo1);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#cadastro-container{
+  display: none;
+}
+
+#alterar-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.product{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+  
+}
+.product *{
+  margin: 10px 10px;
+}
+
+.product img{
+  width: 100px;
+  border: 1px solid var(--color-line);
+}
+
+.product .product-name{
+  max-width: 500px;
+}
+
+#alterar-prod{
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 50px;
+
+}
+
+#form-alteracao input{
+  width:500px;
+}
+#form-alteracao textarea{
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  resize: vertical;
+  text-align: left;
+  padding-left: 0.25rem;
+  width: 500px;
+  height: 200px;
+}

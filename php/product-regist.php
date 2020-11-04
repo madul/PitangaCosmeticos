@@ -52,8 +52,8 @@
             <!-- side menu-->
             <div id="sideMenu">
               <ul>
-                  <li onmouseout="onMouseP(this)" onmouseover="onMouseP(this)" onclick="select('cadastro-container')">Cadastrar Produtos</li>
-                  <li onmouseout="onMouseP(this)" onmouseover="onMouseP(this)" onclick="select('alterar-container')">Alterar Produto</li>
+                  <li onmouseout="onMouseP(this)" onmouseover="onMouseP(this)" onclick="selectCad('cadastro-container')">Cadastrar Produtos</li>
+                  <li onmouseout="onMouseP(this)" onmouseover="onMouseP(this)" onclick="selectCad('alterar-container')">Alterar Produto</li>
               </ul>
             </div>
             <div id="mutable">

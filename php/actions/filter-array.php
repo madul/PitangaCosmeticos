@@ -3,7 +3,7 @@
     $numItems = 0;
 
     foreach ($array as $item){
-      if ($array_value == 'todos'){
+      if ($array_value == 'all'){
         $numItems +=1;
       }
       else{

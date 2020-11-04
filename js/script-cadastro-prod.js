@@ -1,7 +1,7 @@
-let colorPitanga = 'rgb(212, 48, 25)';
+//let colorPitanga = 'rgb(212, 48, 25)';
 
 //console.log('aqui');
-function onMouse(element){
+/* function onMouseCad(element){
     
     element.style.cursor === 'pointer' ? 
     element.style.cursor = 'auto' :
@@ -10,9 +10,9 @@ function onMouse(element){
     element.style.color === 'rgb(212, 48, 25)' ? 
     element.style.color = 'black' : 
     element.style.color = colorPitanga;
-}
+} */
 
-function select(menu){
+function selectCad(menu){
   let page = document.getElementById('mutable').children;
   
   Array.prototype.forEach.call(page,element => {
@@ -54,7 +54,7 @@ function alterar(element){
   details.defaultValue = product['details'];
   href.defaultValue = product['href'];
 
-  select('alterar-prod');
+  selectCad('alterar-prod');
 }
 
 

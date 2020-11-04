@@ -1,5 +1,5 @@
 
-let colorPitanga = 'rgb(212, 48, 25)';
+//let colorPitanga = 'rgb(212, 48, 25)';
 
 function onMouseP(element){
     
@@ -9,16 +9,9 @@ function onMouseP(element){
 
     element.style.color === 'rgb(212, 48, 25)' ? 
     element.style.color = 'black' : 
-    element.style.color = colorPitanga;
+    element.style.color = 'rgb(212, 48, 25)';
 }
 
-function apareceModal(){
-    let modal = document.getElementsByClassName('modal')[0];
-    
-    modal.style.display === 'flex' ?
-    modal.style.display = 'none' :
-    modal.style.display = 'flex';
-}
 
 function pointer(element){
     
@@ -34,7 +27,7 @@ function select(category){
     let showcase = document.getElementById('showcase');
     
     showcase.style.display = 'grid';
-    if (category === 'todos')
+    if (category === 'all')
         Array.prototype.forEach.call(products,product => product.style.display ='grid');
     else
         Array.prototype.forEach.call(products,product => {
@@ -44,18 +37,15 @@ function select(category){
         });
 }
 
-window.onclick = function(event) {
-    let modal = document.getElementsByClassName("modal")[0];
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
 function montarModal(element){
     let id = element.parentNode.parentNode.id;
+    let modalHText = document.getElementsByClassName("modalHText")[0];
     let modalImage = document.getElementsByClassName('modalImage')[0];
     let modalText = document.getElementsByClassName('modalText')[0]
     
+    while(modalHText.hasChildNodes()){
+        modalHText.removeChild(modalHText.firstChild);
+    }
     while(modalImage.hasChildNodes()){
         modalImage.removeChild(modalImage.firstChild);
     }
@@ -67,24 +57,26 @@ function montarModal(element){
    
     let image = document.createElement('img');
     image.src = "../images/" + product.imageURL;
-    image.alt = product.name;   
+    image.alt = product.name;
+    image.style.width = "100%";   
     modalImage.appendChild(image);
 
     let title = document.createElement('P');
-    title.className = 'modalTitle';
+    title.className = 'modalTitle text-left font-weight-bold h5';
     title.innerHTML= product.name;
-    modalText.appendChild(title);
+    modalHText.appendChild(title);
 
     let info = document.createElement('P');
-    info.className = 'modalProdInfo';
+    info.className = 'modalProdInfo text-left text-muted';
     info.innerHTML= product.range + " - " + product.content;
-    modalText.appendChild(info);
+    modalHText.appendChild(info);
 
     let modalDescription = document.createElement('div');
     modalDescription.className = 'modalProdDescription';
 
     let description = document.createElement('P');
     description.innerHTML = product.description;
+    description.className = 'text-justify';
     modalDescription.appendChild(description);
 
     //get first line of details to add bold style
@@ -92,6 +84,7 @@ function montarModal(element){
     firstLine = '<strong>'.concat(firstLine,'</strong>');
     let benefits = document.createElement('P');
     benefits.innerHTML = firstLine.concat(product.details.slice(product.details.indexOf('<br')));
+    benefits.className = 'text-left';
     modalDescription.appendChild(document.createElement('br'));
     modalDescription.appendChild(benefits);
 
@@ -125,12 +118,13 @@ function updateValueOrder(){
         let element = document.getElementById(`qtd-prod-product-${product['productID']}`);
         total += element.value * product['currentPrice'];
     }
-    totalPrice.innerHTML = `R$ ${total.toFixed(2)}`;
+    totalPrice.innerHTML = `Total: R$ ${total.toFixed(2)}`;
 }
 
  $(function(){
-    $('#form-order').on('submit', function(event){
-        event.preventDefault();
+    $('#form-order').on('submit', function(e){
+        e.preventDefault();
+        e.stopPropagation();
         $.ajax({
             type: 'post',
             url: '../php/actions/place-order.php',
@@ -142,9 +136,14 @@ function updateValueOrder(){
                 $("#orderModule").css("display", "none");
                 $("#orderPlaced").append(paragraph);
                 $("#orderPlaced").css("display", "block");
-
                 clearForms("form-order");
-            }
+                             
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error, status = " + textStatus + ", " +
+                      "error thrown: " + errorThrown
+                );
+              }
         });
     });
 }); 

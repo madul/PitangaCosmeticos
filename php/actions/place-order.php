@@ -95,13 +95,14 @@
   $lastOrderID = $conn->insert_id;
 //}
 //{
+  $message = "Algo deu errado.";
 /** soldItems **/
 foreach($itemsSold as $itemS){
   $sql_soldItems = "insert into soldItems (productID, valueItem, quantity, orderID) values (?,?,?,?)";
   $stmt= $conn->prepare($sql_soldItems);
   $stmt->bind_param("iiii",$itemS['id'],$itemS['price'],$itemS['quantity'],$lastOrderID);
   if($stmt->execute()){
-    $message = "Pedido realizado com sucesso. <br> Obrigade, ".$username."!";
+    $message = "Pedido realizado com sucesso. \n Obrigade, ".$username."!";
   }
   else{
     $sql_delete = "delete from orders where orderID = ".$lastOrderID;

@@ -1,114 +1,3 @@
-:root{
-    --color-logo1: #FFB8AA;
-    --color-logo2: #FFF8F7;
-    --color-logo3: #FFE9E5;
-    --color-pitanga: #D43019;
-    --color-pitanga-preta: #4F1711;
-    --color-green-handle: #638C35;
-    --color-line: #b3b3b3;
-
-    --font-title: Charm, cursive;
-    --font-pattern: Montserrat, sans-serif;
-    --font-pattern2: ABeeZee, sans-serif;
-
-}
-body{
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    
-}
-/* ESPIADINHA */
-.modal{
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    position: fixed;
-    top:0;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0,0,0,0.3);
-    overflow-y: initial !important;
-}
-.close{
-    text-align: right;
-    font-size: 3rem;
-    grid-area: close;   
-    width: 75%;
-}
-
-.modalBody{
-    width: 80%;
-    height: 70%;
-
-    display: grid;
-    grid-template-columns: 320px 70%;
-    grid-template-rows: 1fr 15%;
-    grid-template-areas:    'modalImage modalText' 
-                            'modalButtons modalButtons';
-    background-color: white;
-    
-    border-radius: 10px;
-    padding: 30px;
-    
-    overflow-y: auto;
-}
-.modalImage{
-    
-    grid-area: modalImage;
-    align-self: center;
-}
-.modalImage img{
-    width: 320px;
-}
-.modalText{
-    background-color: white;
-    grid-area: modalText;
-    padding: 10px;
-}
-
-.modalText p{
-    text-align: left;
-    padding: 5px;
-}
-
-.modalTitle{
-    font-weight: bold;
-}
-.modalProdInfo{
-    text-align: left;
-    font-size: 0.85rem;
-    color: var(--color-line);
-    margin-bottom: 1rem;
-}
-
-.modalProdDescription p{
-    text-align: left;
-    padding: 5px;
-}
-
-.modalButtons{
-    width: 100%;
-    grid-area: modalButtons;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    padding: 30px 30px;
-}
-
-.modalButtons button{
-    width: 200px;
-    height: 50px;
-    font-size: 0.95rem;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    background-color: var(--color-green-handle);
-}
-/* END OF ESPIADINHA */
-
 #prodBody{
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -143,29 +32,30 @@ body{
 .product{
     margin: 1rem;
     height: 400px;
+    padding: 0 10px;
 
     background-color: white;
-    border: 1px solid var(--color-logo3);
+    border: 2px solid var(--color-logo1);
 
     display: grid;
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-rows: 2fr 100px 90px;
     align-content: center;
     justify-content: center;
 }
 
 .product .imageContainer {
     width: 220px;
+    
     position: relative;
     justify-self: center;
-}
-.product .imageContainer a img{
-    width: 100%;
-
+    overflow:hidden;
 }
 
 .product:hover .infoRapida{
     height: 2rem;
     transition: height 0.2s;
+    align-items:center;
+    justify-content:center;
 }
 .infoRapida{
     background-color: rgba(0,0,0,0.7);
@@ -184,42 +74,23 @@ body{
 }
 
 .prod-desc{
-    font-size: 0.85rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 10px;
+    align-items: center;
+    text-align:center;
+    padding-top: 10px;
+    font-size: 0.8rem;
 }
 
 .prod-name{
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     
 }
 
 .prod-range{
     font-size: 0.85rem;
-    
-}
-
-.prod-footer{
-    display: flex;
-    flex-direction: row;
-    align-items: space-between;
-    justify-content:space-around;
-
-    justify-self: center;
-    width: 90%;
-    border-top: 1px solid var(--color-line);
-}
-
-.prod-price{
-    display: flex;
-    flex-direction: column;
-    
-    height: 75px;
-    justify-self: center;
-    justify-content: center;   
     
 }
 
@@ -258,119 +129,8 @@ body{
 /** ORDER FORM **/
 #orderDoc{
     display: none;
-    flex-direction:column;
-    align-items: center;
-    justify-content:center;
-    justify-self: center;
-    width: 100%;
-}
-#orderPlaced{
-    display: none;
-}
-#orderModule{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content:center;
-    justify-self: center;
-    margin: 10px;
-    width: 80%;
-    
-}
-
-#orderModule #form-order{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 100%;
-}
-#orderModule #form-order .input-container-order{
-    display: flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:start;
-    
-    min-width: 60px;
-    margin: 5px 0;
-    width:100%;
-}
-#orderModule #form-order #group-input{
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    justify-content: space-between;
-    text-align: left;
-    width: 100%;
-}
-#orderModule #form-order #group-input * {
-    margin-right:10px;
-}
-#orderModule #form-order input{
-    width: 100%;
-    height: 2rem;
-    border-radius: 10px;
-    border: 1px solid var(--color-line);
-    text-align: left;
-    padding-left: 0.25rem;
-}
-#orderModule #form-order #complemento{
-    width: 40%;
-    min-width: 120px;
-}
-#orderModule #form-order #state{
-    width: 60px;
-}
-#orderModule #form-order .prod-form-order{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    width: 100%;   
-}
-
-#orderModule #form-order .prod-form-order input{
-    width: 50px;
-    border-radius: 10px;
-    border: 1px solid var(--color-lines);
-}
-#orderModule #form-order .prod-form-order label{
-    display: grid;
-    grid-template-columns: 100px 6fr 1fr 2fr;
-    align-items: center;
-    justify-items: start;
-    width: 100%;
-    margin-left: 10px;
-}
-#orderModule #form-order .prod-form-order label{
-    margin: 5px ;
-}
-#orderModule #form-order .prod-form-order img{
-    width: 80px;
-    border: 1px solid var(--color-lines);
-    border-radius: 5px;
-}
-
-#orderModule #form-order .prod-form-order p{
-    padding: 5px;
-}
-
-#orderModule #totalPriceContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top:20px;
-}
-#orderModule #totalPriceContainer *{
-    padding: 5px;
 }
 #orderModule button{
-    width: 160px;
-    height: 2rem;
-    margin: 40px 0px;
-    border: 1px solid var(--color-line);
-    border-radius: 10px;
-    background-color: var(--color-logo1);
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
+    background-color: var(--color-pitanga-preta);
+    color: var(--color-logo2);
 }

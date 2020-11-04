@@ -10,7 +10,7 @@
     session_destroy();
 
 
-   header("Location: http://pitanga/index.php");
+   header("Location: ../index.php");
    exit();
   
 ?>

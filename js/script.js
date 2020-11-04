@@ -50,8 +50,7 @@ function validate_data(element){
     default:
       valid = true;
   }
-  //console.log(parent.querySelectorAll(`p.alert_${element.id}`).length);
-  console.log('valid',valid);
+  
   if(parent.querySelectorAll(`p.alert_${element.id}`).length == 0 && !valid){
     let newElement = document.createElement('P');
     newElement.className = `alert_${element.id}`;
@@ -69,9 +68,7 @@ function validate_data(element){
   let parag = document.getElementsByTagName('P');
   let numAlert  = Array.from(parag).filter(el => el.className.match(/^alert_*/g)).length;
 
-  console.log("alert",
-    Array.from(parag).filter(el => el.className.match(/^alert_*/g)).length   
-  );
+  
   if (numAlert != 0){
     $("#btn-register").prop('disabled', true);
   }
@@ -207,8 +204,9 @@ function meu_callback(conteudo) {
       alert("CEP não encontrado.");
   }
 }
+/** Função baseada no site https://viacep.com.br/exemplo/javascript/  **/
 function pesquisacep(valor) {
-
+//  document.cookie = 'cookie2=value2; SameSite=None; Secure';
   //Nova variável "cep" somente com dígitos.
   var cep = valor.replace(/\D/g, '');
 

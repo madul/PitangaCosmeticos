@@ -1,0 +1,21 @@
+.footer{
+  position: relative;
+  bottom: 0px;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  padding: 1rem ;
+  height: 8rem;
+
+}
+
+#img_formas_pagamento{
+  width: 200px;
+  margin-bottom: 0.5rem;
+}
+#formas_pagamento p{
+  color: var(--color-pitanga-preta);
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 0;
+}

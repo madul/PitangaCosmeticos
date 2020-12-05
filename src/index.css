@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+:root{
+    --color-logo1: #FFB8AA;
+    --color-logo2: #FFF8F7;
+    --color-logo3: #FFE9E5;
+    --color-pitanga: #D43019;
+    --color-pitanga-preta: #4F1711;
+    --color-green-handle: #638C35;
+    --color-lines: #b3b3b3;
+
+    --font-title: Charm, cursive;
+    --font-pattern: Montserrat, sans-serif;
+    --font-pattern2: ABeeZee, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family:  var(--font-pattern), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.sectionTitle{
+  color:var(--color-pitanga);
+  font-size: 3rem;
+  text-align: left;
+  margin: 0rem 1rem;
+  padding: 0.5rem 0;
+}

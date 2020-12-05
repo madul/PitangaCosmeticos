@@ -1,0 +1,185 @@
+#shopping-list{
+  position: fixed;
+  width: 300px;
+  z-index: 10000;
+  
+  margin: 0;
+  right: 0;
+  top:78px;
+  bottom:0;
+  background-color: var(--color-logo3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+#shopping-list #headerCart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+#shopping-list #headerCart p{
+  font-size:1.25rem;
+}
+#shopping-list .titleCart{
+  color: var(--color-pitanga);
+  font-weight: bold;
+  margin: 10px 0;
+}
+#shopping-list #headerCart #closeCart{
+  top:0;
+  right: 0;
+  position: absolute;
+  margin: 5px;
+  padding: 0 8px;
+  background-color: var(--color-logo3);
+  border:0;
+  font-size: 2rem;
+  color: var(--color-pitanga-preta);
+}
+
+#shopping-list .itemsList{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content:start;
+  padding: 0;
+  margin-bottom: 120px;
+  height:100%;
+  overflow-y: auto;
+}
+#shopping-list .itemsList .itemCart{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 70px;
+  width: 90%;
+  justify-content:center;
+  align-items: center;
+  border: 1px solid var(--color-lines);
+  padding: 5px;
+  margin: 5px;
+}
+#shopping-list .itemsList .itemCart .imgCart{
+  background: white;
+  width:80px;
+  height:80px;
+  border: 1px solid var(--color-lines);
+  justify-self: center;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+#shopping-list .itemsList .itemCart .quantitySet{
+  display: flex;
+  flex-direction:'row';
+  justify-content: space-around;
+  align-items:center;
+}
+#shopping-list .itemsList .itemCart .numItensCart{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+}
+#shopping-list .itemsList .itemCart .prod-quantity-input{
+  background: white;
+  width: 2rem;
+  border: 1px solid var(--color-lines);
+  text-align: center;
+}
+#shopping-list .itemsList .itemCart .numItensCart .button-qtd{
+  width:1.5rem;
+  font-size: 1rem;
+  background: white;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid var(--color-lines);
+  
+}
+/* .prod-quantity-input input[type="number"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+.prod-quantity-input input[type=number]::-webkit-inner-spin-button, 
+.prod-quantity-input input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}
+ */
+.del-item{
+  width:1.5rem;
+  font-size: 1rem;
+  background: none;
+  border-radius: 5px;
+  border: 0;
+  padding: 0;
+}
+.del-item:hover{
+  background-color:var(--color-logo1);
+}
+#shopping-list .itemsList .itemCart .numItensCart .minus{
+  border-radius: 5px 0 0 5px;
+}
+#shopping-list .itemsList .itemCart .numItensCart .plus{
+  border-radius: 0 5px 5px 0;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-around;
+  height:100%;
+  margin: 0 5px;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .prodNameCart{
+  font-weight: bold;
+  text-align:left;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .prodContentCart{
+  font-size: .75rem;
+  color: gray;
+}
+#shopping-list .itemsList .itemCart .prodInfoCart .priceItemCart{
+  font-size: 0.9rem;
+}
+#totalCart{
+  bottom: 0px;
+  position: absolute;
+  background: var(--color-logo2);
+  width: 100%;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--color-lines);
+}
+#totalCart .infoTotalCart{
+  width: 90%;
+}
+#totalCart .infoTotalCart div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+
+}
+#totalCart button{
+  background: var(--color-logo1);
+  border: 1px solid var(--color-lines);
+  border-radius: 20px;
+  width: 80%;
+  height: 2rem;
+  color: var(--color-logo2);
+  font-size: 1.25rem;
+  bottom: 0;
+  margin:5px;
+  position: absolute;
+
+  
+}
+/** END OF SHOPPING CART **/

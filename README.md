@@ -7,10 +7,10 @@ Até **05/12**, foram desenvolvidas as linguagens:
 - HTML 
 - CSS
 - JavaScript
-🛫 MySQL (nesse repositório -> [ModuloBancoDados](https://github.com/madul/ModuloBancoDados))
-🛫 PHP 
-🛫 Bootstrap
-🛫 React 
+- 🛫 MySQL (nesse repositório -> [ModuloBancoDados](https://github.com/madul/ModuloBancoDados))
+- 🛫 PHP 
+- 🛫 Bootstrap
+- 🛫 React 
 
 
 🛫 - nível intermediário

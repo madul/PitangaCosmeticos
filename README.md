@@ -15,6 +15,6 @@ Até **05/12**, foram desenvolvidas as linguagens:
 
 🛫 - nível intermediário
 
-☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado no link: https://github.com/madul/ModuloBancoDados
+☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado [aqui](https://github.com/madul/ModuloBancoDados)
 
 * As imagens de produtos e algumas informações sobre os mesmos foram tiradas do site da Natura. Preços fictícios.

@@ -1,0 +1,9 @@
+multer
+express
+consign
+els
+bcryptjs
+sequelize
+jsonwebtoken
+mysql2
+

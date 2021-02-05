@@ -11,10 +11,20 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
 - PHP 
 - Bootstrap
 - React 
-- NodeJS
+- NodeJS (também na pasta node-avancado nesse repositório -> [miscelanea-recodepro](https://github.com/madul/miscelanea-recodepro))
+- Python (pasta mod-python nesse repositório -> [miscelanea-recodepro](https://github.com/madul/miscelanea-recodepro))
+- NoSQL
 
 
 
 ☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado em [ModuloBancoDados](https://github.com/madul/ModuloBancoDados)
+
+☝🏾 - Para rodar a versão mais recente do projeto deve-se instalar os seguintes módulos node ``` npm install <nome_modulo> ```:
+  * express
+  * els
+  * bcryptjs
+  * sequelize
+  * jsonwebtoken
+  * mysql2
 
 * As imagens de produtos e algumas informações sobre os mesmos foram tiradas do site da Natura. Preços fictícios.

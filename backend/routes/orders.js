@@ -24,12 +24,54 @@ module.exports = function(app){
     let newClient = false;
     let message = ""
     let status_ = true;
-    console.log("BODY:",req.body);
 
     let keys = Object.keys(req.body);
     let items = [];
-    console.log(keys);
     let price = [];
+
+    const ordem = () =>{queryO.insertOrder(user,connection,(err,result) =>{
+      if(err){
+        if(newClient){
+          queryC.deleteClient(userId, connection);
+        }        
+       status_ = false;  
+       message = "Ordem não pode ser inserida. \n Tente novamente mais tarde" ;
+       res.send({status: status_, message: message})
+      } 
+      else{
+        orderId = result.insertId;
+        /** insert soldItems */
+    
+        items.forEach(item => {
+          item.orderId = orderId;
+          querySI.insertSoldItem(item, connection, (err,result) =>{
+            if(err) {
+             querySI.deleteSoldItemByOrderId(item.orderId, connection);
+             queryO.deleteOrder(item.orderId, connection);
+              if(newClient){
+                console.log("NEW CLIENT: ",newClient)
+                queryC.deleteClient(userId, connection);
+              }
+              status_ = false;
+              message = "Desculpa, não temos esse item em estoque. \n Por favor, tente mais tarde. Em breve reporemos o estoque."
+    
+              res.send({status: status_, message: message})
+              
+            }
+            else{
+              if(status_){
+                message = "Pedido realizado com sucesso!";
+                if(newClient){
+                  message += '\n Usuário criado! \n Senha: fruta123'
+                }
+              }
+              res.send({status: status_, message: message})
+            }
+          })
+        })
+      }
+    })}
+    
     keys.forEach(key =>{
       if(key.match(/^price-/)){
         price.push( {id: key.split("-")[1], price: req.body[key]})
@@ -58,72 +100,41 @@ module.exports = function(app){
       "name" : req.body.name,
       "surname" : req.body.surname,
       "email": req.body.email,
+      "password": 'fruta123',
       "cpf": req.body.cpf,
       'zipCode': req.body.zipCode,
       'uf': req.body.uf,
       'city': req.body.city,
       'address': req.body.logradouro + '- ' + req.body['address-number']
     }
+    
     if (!req.body.clientId){
-      queryC.setClient(user, connection, (err,result) =>{
+      queryC.insertClient(user, connection, (err,result) =>{
         if(err){
          // res.send({error: err});
          status_ = false; 
          message = "Erro no cadastro. \n Por favor, tente mais tarde.";
          
-         
+        res.send({status: status_, message: message}) 
+        console.log("ERRO USER: ", err);
         }
         userId = result.insertId;
+        user['clientId'] = userId
         newClient = true;
+        ordem()
       })
     }
 
     user['clientId'] = userId
-
-    /** insert Order */
-    console.log ("USER PRE ORDER: ", user)
-    queryO.insertOrder(user,connection,(err,result) =>{
-      if(err){
-        if(newClient){
-          queryC.deleteClient(userId, connection);
-        }        
-       // res.send({error: err});
-       status_ = false;  
-       message = "Ordem não pode ser inserida. \n Tente novamente mais tarde" ;
-       throw err;
-      } 
-      else{
-        orderId = result.insertId;
-        /** insert soldItems */
     
-        console.log("INSERTED ID: ",orderId)
-        items.forEach(item => {
-          item.orderId = orderId;
-          console.log("ITEM: ",item)
-          querySI.insertSoldItem(item, connection, (err,result) =>{
-            if(err) {
-              querySI.deleteSoldItemByOrderId(item.orderId, connection);
-              queryO.deleteOrder(item.orderId, connection);
-              if(newClient){
-                queryC.deleteClient(userId, connection);
-              }
-              //res.send({error: err})
-              status_ = false;
-              console.log("ERRO.", status_)
-              message = "Erro ao inserir item. \n Por favor, tente mais tarde."
-              
-              throw err;
-            }
-          })
-        })
-      }
-    })
-    if(status_){
-      message = "Pedido realizado com sucesso!";
-      if(newClient){
-        message += '\n Usuário criado! \n Senha: fruta123'
-      }
+    console.log("ID USER: ",!user['clientId'])
+    /** insert Order */
+    
+    if(user['clientId']) {
+      console.log("ENTROU NO IF"); 
+      ordem()
     }
-    res.send({status: status_, message: message})
+    
+    
   })
 }

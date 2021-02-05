@@ -12,7 +12,7 @@ export default function ShopButton(props) {
     e.preventDefault();
     props.setShowList(true);
   }
-  console.log(props)
+  //console.log(props)
   return(
     <button id="gen-shop-button" className="shop-btn" name='shop' onClick={handleClick}>
       <img src={require('../images/icon-shop-plus.png').default}/>

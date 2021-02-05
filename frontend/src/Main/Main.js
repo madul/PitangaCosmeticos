@@ -57,9 +57,13 @@ export default function Main (){
     }
   }
 
+  const deleteList = () =>{
+    setShopList([])
+    console.log(shopList)
+  }
   return(
     <div>
-      <ShopContext.Provider value={[shopList, alterItemsList]}>
+      <ShopContext.Provider value={[shopList, alterItemsList, deleteList]}>
         
           {showButton && <ShopCart  show={showList} setShowList={setShowList}/>}
           

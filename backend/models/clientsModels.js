@@ -1,3 +1,4 @@
+var bcrypt = require('bcryptjs');
 
   getClientById = function (id, connection, callback){
     console.log(id)
@@ -11,7 +12,7 @@
 
   insertClient = (user, connection, callback) =>{
     connection.query(`insert into clients (name, surname, cpf, email, password, address, city, state, zipCode) 
-    values('${user.name}','${user.surname}','${user.cpf}','${user.email}','fruta123','${user.address}','${user.city}','${user.uf}','${user.zipCode}')`, callback);
+    values('${user.name}','${user.surname}','${user.cpf}','${user.email}','${bcrypt.hashSync(user.password,8)}','${user.address}','${user.city}','${user.uf}','${user.zipCode}')`, callback);
   }
 
   deleteClient = (id, connection, callback) =>{

@@ -31,10 +31,10 @@ exports.signin = (req,res,next) => {
     console.log(req.body.email)
     console.log("USER: ",user)
     console.log("ERROR:", err)
-    if(!user.length >0) {
+    if(!(user.length >0)) {
       return res.status(404).send({error: "User not found."});
     }
-    /* console.log("USER CONTROLLER 33: ", user.length) */
+     console.log("USER CONTROLLER 37: ", user.length) 
     var passwordIsValid = bcrypt.compareSync(req.body.password, user[0].password);
 
     if(!passwordIsValid){

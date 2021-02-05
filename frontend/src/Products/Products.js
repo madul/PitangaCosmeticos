@@ -9,13 +9,18 @@ import './Product.css';
 
 function Product(props){
   const [showModal, setShowModal] = useState(false);
-  const {productID, range, name, imageURL, price, currentPrice, href} = props.product;
+  const {productID, range, name, imageURL, price, currentPrice, href, active} = props.product;
+  let classes = "product";
+
+  classes += active ? "" : " disabled";
+
+  console.log("ATIVO: ", active)
   function addItemToList(e){
     e.preventDefault();
     props.shopList[1](props.product,"add");
   }
   return(
-    <article id={productID} className="product {category}">
+    <article id={productID} className={classes}>
       <div className='imageContainer'>
         <a href={href} target="_blank">
             <img src={require(`../${imageURL}`).default} alt="Corretivo alta cobertura"/>
@@ -31,18 +36,19 @@ function Product(props){
       <div className="prod-footer">
         <div className='prod-price'>
           { currentPrice !== price
-            ? <p className='old-price'>R$ {price}</p>
+            ? <p className='old-price'>R$ {price.toFixed(2)}</p>
             : null
           }
-          <p className='price'> R$ {currentPrice}</p>
+          <p className='price'> R$ {currentPrice.toFixed(2)}</p>
         </div>
-        <button className="shop-btn" name='shop' onClick={addItemToList}>
+        <button className="shop-btn" name='shop' onClick={addItemToList} disabled={!active}>
           <img src={require('../images/icon-shop-plus.png').default} alt="shop cart"/>
         </button>
       </div>
       <ProdModal 
         show={showModal}
         onHide={() => setShowModal(false)}
+        addItem={addItemToList}
         product={props.product}
       />
     </article>

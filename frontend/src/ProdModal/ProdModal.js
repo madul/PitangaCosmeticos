@@ -8,7 +8,11 @@ import Modal from 'react-bootstrap/Modal';
 export default function ProdModal(props){
   const details = props.product.details.split('<br>');
 
-
+  function addToCart(e){
+    e.preventDefault()
+    props.addItem(e)
+    props.onHide()
+  }
   return(
     <Modal
       {...props}
@@ -42,7 +46,7 @@ export default function ProdModal(props){
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={props.onHide}>Adicionar ao Carrinho</Button>
+        <Button variant="success" onClick={addToCart} disabled={!props.product.active}>Adicionar ao Carrinho</Button>
       </Modal.Footer>
     </Modal>
   );

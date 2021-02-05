@@ -49,13 +49,9 @@ function ItemProduct(props){
 
 export default function BuyPage(props){
   const user = useContext(UserContext);
-  const shopList = useContext(ShopContext);
+  const [shopList,eraseList] = useContext(ShopContext);
   const history = useHistory();
- 
-  shopList.eraseList = () => {
-    shopList.shopList = [];
-  }
-  //console.log(user.user)
+
   useEffect(() => {
     props.show(false)
     return() => {
@@ -63,25 +59,27 @@ export default function BuyPage(props){
     }
   })
 
-  function sendToBack(e){
+  function sendToBack(e, actualList){
     e.preventDefault();
     console.log(e.target)
+    console.log(actualList)
     fetch("http://localhost:3001/place-order", 
     { method: "POST", 
       body: new FormData(e.target) 
     })
     .then(response => response.json())
-    .then(result => { 
-      
-      alert(result.message); 
+    .then(result => {       
+      console.log(result.status)
       if(result.status){
-        shopList.eraseList();
-        /* shopList.forEach(()=>{
-          shopList.pop();
-        }); */
-        console.log(shopList.shopList)
+        console.log("Dentro de status")
+        
+        actualList[2]()
+        alert(result.message);
         history.push('/')
         console.log(result)
+      }
+      else{
+        alert(result.message);
       }
     });
   } 
@@ -99,7 +97,7 @@ export default function BuyPage(props){
             <div id="orderModule">
               <p>Preencha o formulário abaixo para realizar seu pedido dos produtos Pitanga</p>
               <br/><br/>
-              <Form id="form-order" onSubmit={sendToBack} >
+              <Form id="form-order" onSubmit={(event) => sendToBack(event, shopList)} >
               <input type="hidden" id="clientId" name="clientId" value={user.user.clientID}/>
               <Form.Row>
                 <Form.Group as={Col}>

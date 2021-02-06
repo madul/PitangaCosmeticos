@@ -77,7 +77,7 @@ function ShopCart(props){
           {props.itemsCart.itemsCart[0]['quantity'] !=0 &&
              props.itemsCart.itemsCart.map(item =>
               <ListItem 
-                key={item.productID} 
+                key={item.product.productID} 
                 all={props.itemsCart.itemsCart} 
                 item={item} 
                 addItem={props.addItem} 

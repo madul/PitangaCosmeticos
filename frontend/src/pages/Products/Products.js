@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from 'react';
 import SideMenu from "../../components/SideMenu/SideMenu";
 import ProdModal from "../../components/ProdModal/ProdModal";
 
-import {ShopContext} from "../../Contexts/shopContext";
 import * as CartAction from '../../actions/cartActions';
 
 import './Product.css';
@@ -117,11 +116,7 @@ function Products(props) {
         <section id="sectionShowcase">
           {currentProducts && 
             currentProducts.map(product =>
-              <ShopContext.Consumer key={product.productID}>
-                {(shopList) =>
-                  <Product  itemsCart={props.itemsCart.itemsCart} addItem={props.addItem} shopList={shopList} product={product} />
-                }
-              </ShopContext.Consumer>
+              <Product  key={product.productID} itemsCart={props.itemsCart.itemsCart} addItem={props.addItem} product={product} />
             )
           }
         </section>

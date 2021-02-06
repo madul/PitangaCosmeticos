@@ -14,7 +14,7 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
 - NodeJS (também na pasta node-avancado nesse repositório -> [miscelanea-recodepro](https://github.com/madul/miscelanea-recodepro))
 - Python (pasta mod-python nesse repositório -> [miscelanea-recodepro](https://github.com/madul/miscelanea-recodepro))
 - NoSQL
-
+- Redux
 
 
 ☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado em [ModuloBancoDados](https://github.com/madul/ModuloBancoDados)

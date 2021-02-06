@@ -1,57 +1,60 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Form, Col } from 'react-bootstrap';
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-import {ShopContext} from "../Contexts/shopContext";
-import {UserContext} from "../Contexts/userContext";
+
+import * as CartAction from '../../actions/cartActions';
 
 import './BuyPage.css';
 
 function ItemProduct(props){
-    
+  let[change,setChange] = useState(false)
+
   function alterQuantity(e){
     e.preventDefault();
-    props.item["quantity"] = e.target.value;
-    props.alterItemsList(props.item,"alter")
+    setChange(change?false:true)
+    props.alterQItem(props.all,props.item,e.target.value)
   }
   function delItem(e){
     e.preventDefault();
-    props.alterItemsList({"productID": e.target.id}, "delete");
+    props.deleteItem(props.all,props.item);
   }
   return(
     <Form.Row className="prod-form-order">
           <div className="wrapp-btn-del">
-          <input type="hidden" name={`price-${props.item.productID}`} value={props.item.currentPrice}/>
+          <input type="hidden" name={`price-${props.item.product.productID}`} value={props.item.product.currentPrice}/>
           <button type="button" className="del-item" onClick={delItem}>
-            <img id={props.item.productID} src={require("../images/iconmonstr-trash-can-2.svg").default}/>
+            <img id={props.item.product.productID} src={require("../../images/iconmonstr-trash-can-2.svg").default}/>
           </button>
           </div>
           <input 
             id="qtd-prod-product-" 
             type="number" 
-            name={`product-${props.item.productID}`}
+            name={`product-${props.item.product.productID}`}
             defaultValue={props.item.quantity}
             onChange={alterQuantity}
             min="0" 
           />
           <Form.Label as={Col} className="order-form-label">
-          <img className="img-buy-form" src={require(`../${props.item.imageURL}`).default} alt={`product-${props.item.name}`} />
-            <p>{props.item.name} </p>
+          <img className="img-buy-form" src={require(`../../${props.item.product.imageURL}`).default} alt={`product-${props.item.product.name}`} />
+            <p>{props.item.product.name} </p>
             <p>-</p>
-            <p>R${props.item.currentPrice}</p>
+            <p>R${props.item.product.currentPrice}</p>
             <p>-</p>
-            <p>R${(Math.round(props.item.currentPrice * props.item.quantity * 100) / 100).toFixed(2)}</p>
+            <p>R${(Math.round(props.item.product.currentPrice * props.item.quantity * 100) / 100).toFixed(2)}</p>
           </Form.Label>
         </Form.Row>
     )
 }
 
-export default function BuyPage(props){
-  const user = useContext(UserContext);
-  const [shopList,eraseList] = useContext(ShopContext);
+function BuyPage(props){
+  const user = props.user;
   const history = useHistory();
 
+  console.log("BUY PAGE: ", props)
   useEffect(() => {
     props.show(false)
     return() => {
@@ -61,22 +64,16 @@ export default function BuyPage(props){
 
   function sendToBack(e, actualList){
     e.preventDefault();
-    console.log(e.target)
-    console.log(actualList)
     fetch("http://localhost:3001/place-order", 
     { method: "POST", 
       body: new FormData(e.target) 
     })
     .then(response => response.json())
     .then(result => {       
-      console.log(result.status)
-      if(result.status){
-        console.log("Dentro de status")
-        
-        actualList[2]()
+      if(result.status){        
+        props.discardCart()
         alert(result.message);
         history.push('/')
-        console.log(result)
       }
       else{
         alert(result.message);
@@ -88,16 +85,13 @@ export default function BuyPage(props){
       <h1 className='sectionTitle'>Faça seu pedido</h1>
       
       <section>
-        <ShopContext.Consumer>
-          {(shopList) =>{
-              return(
-            
+
           <div id="orderDoc">
             
             <div id="orderModule">
               <p>Preencha o formulário abaixo para realizar seu pedido dos produtos Pitanga</p>
               <br/><br/>
-              <Form id="form-order" onSubmit={(event) => sendToBack(event, shopList)} >
+              <Form id="form-order" onSubmit={(event) => sendToBack(event, props.itemsCart.itemsCart)} >
               <input type="hidden" id="clientId" name="clientId" value={user.user.clientID}/>
               <Form.Row>
                 <Form.Group as={Col}>
@@ -155,8 +149,15 @@ export default function BuyPage(props){
               <p>Lista de Produtos</p>
               <br/><br/>
               
-                { shopList[0].map(item =>
-                  <ItemProduct key={item.productID}  item={item} alterItemsList={shopList[1]}/>
+                { props.itemsCart.itemsCart[0]['quantity'] !=0 &&
+                  props.itemsCart.itemsCart.map(item =>
+                  <ItemProduct 
+                    key={item.product.productID}  
+                    item={item} 
+                    all={props.itemsCart.itemsCart}
+                    deleteItem={props.deleteItem}
+                    alterQItem={props.alterQItem}
+                  />
                 )
                 }
               
@@ -166,7 +167,10 @@ export default function BuyPage(props){
                 <p>Total: </p>
                 <p id="totalPriceOrder">R$
                 
-                {(Math.round(shopList[0].reduce((total,item)=> total += item.quantity * item.currentPrice,0) * 100) / 100).toFixed(2)}
+                {props.itemsCart.itemsCart[0].quantity > 0 
+                  ? (Math.round(props.itemsCart.itemsCart.reduce((total, item)=>
+                      total+=item["quantity"]*item.product['currentPrice'],0) * 100) / 100).toFixed(2)
+                  : 0.00.toFixed(2)}
                   </p>
               </div>
               
@@ -175,9 +179,16 @@ export default function BuyPage(props){
 
             <div id="orderPlaced"></div>
           </div>
-          )}}
-          </ShopContext.Consumer>
       </section>
     </main>
   );
 }
+
+const mapStateToProps = state =>({
+  user: state.user,
+  itemsCart: state.itemsCart
+})
+const mapDispatchToProps = (dispatch) => 
+      bindActionCreators(CartAction, dispatch);
+
+export default connect(mapStateToProps,mapDispatchToProps)(BuyPage)

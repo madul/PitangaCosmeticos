@@ -31,7 +31,7 @@ export default function ProdModal(props){
         <Container>
           <Row>
             <Col className="modal-body-personal" xs={12} md={4}>
-              <img src={require(`../${props.product.imageURL}`).default} alt={props.product.name} />
+              <img src={require(`../../${props.product.imageURL}`).default} alt={props.product.name} />
             </Col>
             <Col>
               <p className="prod-description-modal"> {props.product.description}</p>

@@ -1,16 +1,14 @@
 import React from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 import Login from '../Login/Login';
-import {UserContext} from "../Contexts/userContext";
 
 import './header.css';
 
 
 function Header (){
-  const user = useContext(UserContext);
   const [username,setUserName] = useState("");
   const [token,setToken] = useState("");
 
@@ -19,7 +17,7 @@ function Header (){
   return(
     <Navbar className="navbar" expand='sm'>
       <Navbar.Brand as={Link} to="/">
-        <img id="logo" src={require(`../images/pitanga2_logo_dark_menu.png`).default} alt="Pitanga logo"/>
+        <img id="logo" src={require(`../../images/pitanga2_logo_dark_menu.png`).default} alt="Pitanga logo"/>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="main-navbar" />
       <Navbar.Collapse id="main-navbar">

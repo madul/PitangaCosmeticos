@@ -1,30 +1,24 @@
 import React from 'react';
-import { useContext } from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import { BrowserRouter as Router} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import Main from  './Main/Main';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Main from  './pages/Main/Main';
 
-import {UserContext} from "./Contexts/userContext";
+import { Store } from './store';
 
 import './index.css';
  
 
 function User (){
-  let user = useContext(UserContext);
-  console.log(user);
-  //console.log(setUser);
-  user.setUser = (dados) =>{
-    user = dados;
-  }
   return(
-    <UserContext.Provider value={user}>
+    <Provider store={ Store }>
         <Header/>
         <Main />
         <Footer/>
-      </UserContext.Provider>
+      </Provider>
   )
 }
 

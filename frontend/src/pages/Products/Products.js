@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { useEffect, useState, useRef } from 'react';
-import SideMenu from "../SideMenu/SideMenu";
-import ProdModal from "../ProdModal/ProdModal";
+import SideMenu from "../../components/SideMenu/SideMenu";
+import ProdModal from "../../components/ProdModal/ProdModal";
 
-import {ShopContext} from "../Contexts/shopContext";
+import {ShopContext} from "../../Contexts/shopContext";
+import * as CartAction from '../../actions/cartActions';
 
 import './Product.css';
 
@@ -13,17 +16,15 @@ function Product(props){
   let classes = "product";
 
   classes += active ? "" : " disabled";
-
-  console.log("ATIVO: ", active)
   function addItemToList(e){
     e.preventDefault();
-    props.shopList[1](props.product,"add");
+    props.addItem(props.itemsCart,{product:props.product})
   }
   return(
     <article id={productID} className={classes}>
       <div className='imageContainer'>
         <a href={href} target="_blank">
-            <img src={require(`../${imageURL}`).default} alt="Corretivo alta cobertura"/>
+            <img src={require(`../../${imageURL}`).default} alt={name}/>
         </a>
         <div className='infoRapida' onClick={(e) => {e.preventDefault(); setShowModal(true)}}>
             <p>Espiadinha</p>
@@ -42,7 +43,7 @@ function Product(props){
           <p className='price'> R$ {currentPrice.toFixed(2)}</p>
         </div>
         <button className="shop-btn" name='shop' onClick={addItemToList} disabled={!active}>
-          <img src={require('../images/icon-shop-plus.png').default} alt="shop cart"/>
+          <img src={require('../../images/icon-shop-plus.png').default} alt="shop cart"/>
         </button>
       </div>
       <ProdModal 
@@ -59,13 +60,10 @@ function Products(props) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(['todos']);
   const [currentProducts, setCurrentProducts] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState(['todos']);
-  //const [showOrder,setShowOrder] = useState(false);
   const mounted = useRef(true);
 
 
   useEffect(() =>{
-    //const url = "http://pitanga/api/products.php";
     const url = 'http://localhost:3001/products';
     fetch(url)
       .then(response => response.json())
@@ -80,7 +78,6 @@ function Products(props) {
   },[products]);
 
   useEffect(() => {
-    
     async function Categories(){
 
       if (products){
@@ -108,8 +105,7 @@ function Products(props) {
       setCurrentProducts(products.filter(product => product["category"] === category));
     } else if (category === 'makeup'){
       setCurrentProducts(products.filter(product => product["category"] === category));
-    }
-    setCurrentCategory(category);    
+    }    
   }
   return (
     <main>
@@ -123,7 +119,7 @@ function Products(props) {
             currentProducts.map(product =>
               <ShopContext.Consumer key={product.productID}>
                 {(shopList) =>
-                  <Product  shopList={shopList} product={product} />
+                  <Product  itemsCart={props.itemsCart.itemsCart} addItem={props.addItem} shopList={shopList} product={product} />
                 }
               </ShopContext.Consumer>
             )
@@ -134,4 +130,10 @@ function Products(props) {
   );
 }
 
-export default Products;
+const mapStateToProps = state =>({
+  itemsCart: state.itemsCart
+})
+const mapDispatchToProps = (dispatch) => 
+      bindActionCreators(CartAction, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

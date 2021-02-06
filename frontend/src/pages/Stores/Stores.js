@@ -5,7 +5,6 @@ import {useState, useEffect, useRef} from 'react';
 import './Stores.css';
 
 function Store(props){
-  console.log(props.store.phone)
   return(
     <div className='store'>
       <h3>{props.store.store_name? props.store.store_name : props.store.city}</h3>
@@ -30,7 +29,6 @@ function Stores(props){
     fetch(url)
       .then(response => response.json())
       .then( stores => {
-        console.log("STORES: ", stores)
         if(mounted.current) {         
         setStores(stores.stores);
         }
@@ -39,8 +37,6 @@ function Stores(props){
     return () => mounted.current = false;
   },[stores]);
 
-  console.log(stores[0])
-  console.log(typeof stores)
   return(
     <main>
       <h1 className="sectionTitle">Lojas</h1>

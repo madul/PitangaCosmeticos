@@ -1,8 +1,7 @@
 import React from 'react';
-import { useState, useEffect, useRef, useContext } from 'react';
+import { connect } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup'
-
-import {UserContext} from "../Contexts/userContext";
 
 import './MyOrders.css';
 
@@ -11,7 +10,7 @@ function ListRow(props){
     <ListGroup horizontal="sm" variant="flush">        
       <ListGroup.Item>{props.pedidos.orderID}</ListGroup.Item>
       <ListGroup.Item>
-        <img className="img-list" alt={props.pedidos.name} src={require(`../${props.pedidos.imageURL}`).default}/></ListGroup.Item>
+        <img className="img-list" alt={props.pedidos.name} src={require(`../../${props.pedidos.imageURL}`).default}/></ListGroup.Item>
       <ListGroup.Item>{props.pedidos.name}</ListGroup.Item>
       <ListGroup.Item>{props.pedidos.valueItem}</ListGroup.Item>
 
@@ -20,19 +19,17 @@ function ListRow(props){
 }
 
 
-export default function MyOrders(){
+function MyOrders(props){
   const [meusPedidos,setMeusPedidos] = useState([]);
   const mounted = useRef(true);
-  const user = useContext(UserContext);
-
-  //console.log(user.user);
+  
   useEffect(() =>{
     const url =  `http://localhost:3001/myOrders`;
     
     fetch(url,{ 
         method: "GET",
         headers: {
-          "id": user.user.clientID
+          "id": props.user.user.clientID
         }
       })
       .then(response => response.json())
@@ -57,9 +54,15 @@ export default function MyOrders(){
         <ListGroup.Item>Preço</ListGroup.Item>
       </ListGroup>
       {meusPedidos && meusPedidos.map( pedidos =>
-        <ListRow pedidos={pedidos} key={pedidos.name}/>
+        <ListRow pedidos={pedidos} key={`${pedidos.orderID}-${pedidos.name}`}/>
       )}
       </section>
     </main>
   );
 }
+
+const mapStateToProps = state =>({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(MyOrders)

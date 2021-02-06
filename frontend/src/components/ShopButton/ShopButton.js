@@ -1,7 +1,7 @@
 import React from'react';
 import {useState, useEffect} from 'react';
 
-import '../index.css';
+import '../../index.css';
 export default function ShopButton(props) {
   const [show, setShow] = useState(false);
 
@@ -15,7 +15,7 @@ export default function ShopButton(props) {
   //console.log(props)
   return(
     <button id="gen-shop-button" className="shop-btn" name='shop' onClick={handleClick}>
-      <img src={require('../images/icon-shop-plus.png').default}/>
+      <img src={require('../../images/icon-shop-plus.png').default}/>
     </button>
   )
 }

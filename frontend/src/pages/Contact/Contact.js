@@ -12,11 +12,11 @@ export default function Contact(props){
       <section id="contact-page" className="container-fluid row mb-5">
         <Col id='contatos'>
           <Row>
-              <img width="40px;" src={require(`../images/whatsapp.jpg`).default} alt="whatsapp"/>
+              <img width="40px;" src={require(`../../images/whatsapp.jpg`).default} alt="whatsapp"/>
               <p>(11) 99999-9999</p>
           </Row> 
           <Row>
-              <img width="40px" src={require(`../images/email.jpg`).default} alt="email" />
+              <img width="40px" src={require(`../../images/email.jpg`).default} alt="email" />
               <p>contato@fullstackeletro.com.br</p>
           </Row>
         </Col>

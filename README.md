@@ -19,7 +19,7 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
 
 ☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado em [ModuloBancoDados](https://github.com/madul/ModuloBancoDados)
 
-☝🏾 - Para rodar a versão mais recente do projeto deve-se instalar os seguintes módulos no backend node ``` npm install <nome_modulo> ```:
+☝🏾 - Para rodar a versão mais recente do projeto deve-se instalar os seguintes módulos no backend ``` npm install <nome_modulo> ```:
   * express
   * els
   * bcryptjs
@@ -29,7 +29,7 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
   * mongo
   * mongoose
   
-☝🏾 - Para rodar a versão mais recente do projeto deve-se instalar os seguintes módulos no frontend node ``` npm install <nome_modulo> ```:
+☝🏾 - Para rodar a versão mais recente do projeto deve-se instalar os seguintes módulos no frontend ``` npm install <nome_modulo> ```:
   * redux
   * react-redux
   * react-bootstrap

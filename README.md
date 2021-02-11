@@ -26,5 +26,9 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
   * sequelize
   * jsonwebtoken
   * mysql2
+  * mongo
+  * mongoose
+  
+  
 
-* As imagens de produtos e algumas informações sobre os mesmos foram tiradas do site da Natura. Preços fictícios.
+- As imagens de produtos e algumas informações sobre os mesmos foram tiradas do site da Natura. Preços fictícios.

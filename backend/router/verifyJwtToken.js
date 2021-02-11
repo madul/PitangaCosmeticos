@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const config = require('../config/config.js');
-const userModel = require('../models/usersModels');
-const connection = require('../config/database');
+const userModel = mongoose.model("users");
 
 verifyToken = (req, res, next) =>{
   let token = req.headers['x-access-token'];
@@ -19,20 +19,15 @@ verifyToken = (req, res, next) =>{
         message: 'Fail to Authentication. Error -> ' + err
       });
     }
-    /* console.log("ACESS DECODED: ", decoded) */
     req.userId = decoded.id;
     next();
   });
 }
 
 isAdmin = (req,res,next) => {
-  userModel.getUserById(req.userId, connection()(), (err,user) => {
-    /* console.log("ID", req.userId)
-    console.log(user); */
+  userModel.findOne({_id: req.userId}, (err,user) => {
     if (user){
-
-      if (user[0].role.toUpperCase() === "ADMIN"){
-        
+      if (user.role.toUpperCase() === "ADMIN"){
         next();
         return;
       } else {

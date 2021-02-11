@@ -2,46 +2,71 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 const config = require('../config/config.js');
 const connection = require('../config/database');
-const userModel = require('../models/usersModels');
-const clientModel = require('../models/clientsModels');
+const mongoose = require('mongoose')
+const userModel = mongoose.model("users");
+const clientModel = mongoose.model("clients");
 
-exports.signup = (req,res) => {
+exports.signup = async (req,res) => {
 
   console.log("Processing SignUp");
+  
+  const validate = await userModel.findOne({email: req.body.email})
+  if (validate){
+    return res.json({message: "Email already being used. Please, choose another one."})
+  }
+  else{
+    const newUser = new userModel({
+      name: req.body.name,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password,8)
+    });
 
-  userModel.createUser({
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password,8),
-    role: req.body.role
-  }, 
-  connection()(),
-  (err,user) => {
-    if(user){
-      res.send("User registered succesfully!");
-    } else {
-      res.status(500).send("Fail! Error -> " + err);
-    }
-  });
+    const newClient = new clientModel({
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+      cpf: req.body.cpf,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zipCode: req.body.zipCode
+    })
+
+    newClient.save(function(err, user) {
+      if (err) {
+          console.log(err);
+          res.send({status: false,message:'Falha no registro do Cliente'});
+      }
+      else{
+        newUser.save(async function(err, user) {
+          if (err) {
+              console.log(err);
+              const user = await clientModel.findOneAndDelete({_id: newClient.id})
+              res.send({status: false,message:'Falha no registro do Usuário'});
+          }
+          else{
+            res.send({status: true,message:"User registered succesfully!"});
+          }
+        })
+      }
+    })
+    
+    
+  }
 }
 
 exports.signin = (req,res,next) => {
   console.log("Sign-In");
-  /* console.log("HEADER: ", req.header, " BODY: ",req.body); */
-  userModel.getUserByEmail(req.body.email, connection()(), (err, user) => {
-    console.log(req.body.email)
-    console.log("USER: ",user)
-    console.log("ERROR:", err)
-    if(!(user.length >0)) {
+  userModel.findOne({email: req.body.email}, (err, user) => {  
+    if(!(user)) {
       return res.status(404).send({error: "User not found."});
     }
-     console.log("USER CONTROLLER 37: ", user.length) 
-    var passwordIsValid = bcrypt.compareSync(req.body.password, user[0].password);
+    var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if(!passwordIsValid){
       return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!"});
     }
-    /* console.log("JWT.SIGN: ", user ) */
-    var token = jwt.sign({ id: user[0].userID }, config.secret, {
+    var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 //expires in 24 hours  
     });
 
@@ -56,20 +81,15 @@ exports.signin = (req,res,next) => {
 }
 
 exports.userContent = (req,res) =>{
-  //console.log("REQ BODY, USERCONTENT: ", req.userId)
-  userModel.getUserById(req.userId, connection()(), (err,user) => {
+  //userModel.getUserById(req.userId, connection()(), (err,user) => {
+  userModel.findOne({_id: req.userId},  (err,user) => {
     if(user){
-     // console.log("USER: ",user)
-
-      if(user[0].role.toUpperCase() === "CLIENT"){
-        clientModel.getClientByEmail(user[0].email,connection()(), (err,client) =>{
-          console.log(client)
-          console.log(err)
+      if(user.role.toUpperCase() === "CLIENT"){
+        clientModel.findOne({email: user.email}, (err,client) =>{
           if(client){
-            console.log(client)
             res.status(200).json({
               "description": "User Content Page",
-              "client": client[0]
+              "client": client
             });
           }
           else{

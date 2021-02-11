@@ -22,18 +22,19 @@ function ListRow(props){
 function MyOrders(props){
   const [meusPedidos,setMeusPedidos] = useState([]);
   const mounted = useRef(true);
-  
+  console.log(props.user.user)
   useEffect(() =>{
     const url =  `http://localhost:3001/myOrders`;
     
     fetch(url,{ 
         method: "GET",
         headers: {
-          "id": props.user.user.clientID
+          "id": props.user.user._id
         }
       })
       .then(response => response.json())
       .then( orders => {
+        console.log("ORDERS: ",orders)
         if(orders){
           if(mounted.current) {         
             setMeusPedidos(orders.orders);

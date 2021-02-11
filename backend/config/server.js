@@ -1,7 +1,8 @@
-var express = require('express');
-var consign = require('consign');
-var cors = require("cors");
-
+const express = require('express');
+const consign = require('consign');
+const cors = require("cors");
+const mongoose = require("mongoose")
+const bcrypt = require('bcryptjs')
 
 
 var app = express();
@@ -12,10 +13,16 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors());
 
+/* require('./src/models/User')
+const User = mongoose.model("users")
+ */
 consign()
-.include('././routes')
-.then('./config/database.js') 
 .then('./models')
+.include('././routes')
+
+.then('./config/database.js') 
+.then('./config/mongodb.js')
+
 .into(app)
 
 module.exports = app;

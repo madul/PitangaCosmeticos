@@ -92,7 +92,7 @@ function BuyPage(props){
               <p>Preencha o formulário abaixo para realizar seu pedido dos produtos Pitanga</p>
               <br/><br/>
               <Form id="form-order" onSubmit={(event) => sendToBack(event, props.itemsCart.itemsCart)} >
-              <input type="hidden" id="clientId" name="clientId" value={user.user.clientID}/>
+              <input type="hidden" id="clientId" name="clientId" value={user.user._id}/>
               <Form.Row>
                 <Form.Group as={Col}>
                   <Form.Label >Nome</Form.Label>
@@ -122,7 +122,7 @@ function BuyPage(props){
                 </Form.Group>
                 <Form.Group as={Col} xs={1}>
                   <Form.Label>UF</Form.Label>
-                  <Form.Control defaultValue={user.user.state} name="uf" />
+                  <Form.Control defaultValue={user.user.state} name="state" />
                 </Form.Group>
                 <Form.Group as={Col}>
                   <Form.Label>Cidade</Form.Label>
@@ -133,7 +133,7 @@ function BuyPage(props){
               <Form.Row>
                 <Form.Group as={Col}>
                   <Form.Label>Logradouro</Form.Label>
-                  <Form.Control defaultValue={user.user.address} name="logradouro"/>
+                  <Form.Control defaultValue={user.user.address} name="address"/>
                 </Form.Group>
                 <Form.Group as={Col} xs={2}>
                   <Form.Label>Número</Form.Label>

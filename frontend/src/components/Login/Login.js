@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 
 import * as UserAction from '../../actions/userActions';
 import './Login.css';
 
 function Login(props){
+  const history = useHistory();
+
+  function toSignUpPage(){
+    history.push('/cadastrar')
+  }
 
   async function login(e){
     e.preventDefault();
@@ -72,7 +78,7 @@ function Login(props){
         </Form>
         <div id="buttons" className="d-flex flex-column p-2">
           <button type="submit" id='signin-btn' className="btn text-light my-2" name="signin" form="form-signin">Entrar</button>
-          <button id="signup-btn" className="btn my-2" disabled>Cadastrar</button>
+          <button id="signup-btn" className="btn my-2" onClick={toSignUpPage}>Cadastrar</button>
         </div>
       </div>
     </div>

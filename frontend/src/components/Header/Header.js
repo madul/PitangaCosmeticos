@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import Login from '../Login/Login';
 
 import './header.css';
 
+const LogoHeader = lazy(()=> import('./LogoHeader'));
 
 function Header (){
   const [username,setUserName] = useState("");
@@ -16,9 +17,9 @@ function Header (){
 
   return(
     <Navbar className="navbar" expand='sm'>
-      <Navbar.Brand as={Link} to="/">
-        <img id="logo" src={require(`../../images/pitanga2_logo_dark_menu.png`).default} alt="Pitanga logo"/>
-      </Navbar.Brand>
+      <Suspense fallback={<h2>Pitanga</h2>}>
+        <LogoHeader />
+      </Suspense>
       <Navbar.Toggle aria-controls="main-navbar" />
       <Navbar.Collapse id="main-navbar">
         <Nav className="mr-auto">

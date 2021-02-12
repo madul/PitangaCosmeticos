@@ -21,7 +21,7 @@ export default function Product(props){
   return(
     <article id={productID} className={classes}>
       <div className='imageContainer'>
-        <Suspense fallback={<p> Carregando...</p>}>
+        <Suspense fallback={<p className="fallback-Prod-Card"> Carregando...</p>}>
           <ImgCardProd href={href} imageURL={imageURL} name={name} setShowModal={setShowModal}/>
         </Suspense>
         <div className='infoRapida' onClick={(e) => {e.preventDefault(); props.setShowModal(true)}}>

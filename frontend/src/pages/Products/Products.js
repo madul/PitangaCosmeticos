@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useEffect, useState, useRef, lazy, Suspense } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import SideMenu from "../../components/SideMenu/SideMenu";
 
 import * as CartAction from '../../actions/cartActions';
 import './Product.css';
-//import Product from './Product';
-const Product = lazy (() => import('./Product'))
+import Product from './Product';
 
 
 
@@ -69,17 +68,13 @@ function Products(props) {
         <section id="sectionSideMenu">
           <SideMenu  categories={categories} selectCategory={selectCategory} />
         </section>
-        <Suspense fallback={<img src={require('../../images/suspense-prod.svg').default} alt="card produto loading"/>}>
         <section id="sectionShowcase">
-          
             {currentProducts &&
               currentProducts.map(product =>             
                 <Product  key={product.productID} itemsCart={props.itemsCart.itemsCart} addItem={props.addItem} product={product} />           
               )
             }
-          
         </section>
-        </Suspense>
       </section>
     </main>
   );

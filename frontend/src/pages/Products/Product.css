@@ -206,3 +206,11 @@ button.close{
     top:0px;
   }
 }
+
+.fallback-Prod-Card{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

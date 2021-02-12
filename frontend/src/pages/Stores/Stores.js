@@ -1,22 +1,10 @@
 import React from 'react';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, lazy, Suspense} from 'react';
 //import Container from 'react-bootstrap/Container';
 
 import './Stores.css';
 
-function Store(props){
-  return(
-    <div className='store'>
-      <h3>{props.store.store_name? props.store.store_name : props.store.city}</h3>
-      <p>{props.store.logradouro}, {props.store.store_number}</p>
-      {
-        props.store.complement? <p>{props.store.complement}</p> : null
-      }
-      <p>{props.store.nbh}</p>
-      <p>({props.store.phone.toString().slice(0,2)}) {props.store.phone.toString().slice(2,6)}-{props.store.phone.toString().slice(6)}</p>
-    </div>
-  );
-}
+const Store = lazy(()=> import("./Store"))
 
 function Stores(props){
   const [stores, setStores] = useState([]);
@@ -40,14 +28,16 @@ function Stores(props){
   return(
     <main>
       <h1 className="sectionTitle">Lojas</h1>
-      
+      <Suspense fallback={<h1>Em breve sua Loja...</h1>}>
       <section id='stores'>
-        {
-          stores && stores.map(store =>
-            <Store key={store.store_id} store={store}/>
-          )
-        }
-      </section>
+       
+          {
+            stores && stores.map(store =>
+              <Store key={store.store_id} store={store}/>
+            )
+          }
+        
+      </section></Suspense>
     </main>
   );
 }

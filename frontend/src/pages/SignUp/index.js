@@ -8,7 +8,6 @@ import './SignUp.css';
 
 
 export default function SignUp () {
-  let [validated, setValidated] = useState(false);
   let [messageCPF, setMessageCPF] = useState("");
   let [messageCEP, setMessageCEP] = useState("");
   let [messageConfirmSenha, setMessageConfirmSenha] = useState("");

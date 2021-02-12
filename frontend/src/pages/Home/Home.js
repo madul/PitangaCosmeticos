@@ -1,15 +1,16 @@
-import React from 'react';
-import {Jumbotron} from "react-bootstrap";
+import React, {lazy, Suspense} from 'react';
+//import {Jumbotron} from "react-bootstrap";
 
 import './Home.css';
+
+const CoverImg = lazy(() => import('./CoverImg'));
 
 export default function Home(props){
   return(
     <main>
-    <Jumbotron fluid>
-        <img src={require(`../../images/sale.png`).default} alt="30% OFF linha Manga Rosa" width="100%" /> 
-        {/* <!--Fundo foto criado por freepik - br.freepik.com --> */}
-    </Jumbotron>
+      <Suspense fallback={<div><h1>Loading...</h1></div>}>
+        <CoverImg />
+      </Suspense>
     </main>
   );
 }

@@ -25,8 +25,8 @@ function Header (){
           <Nav.Link as={Link} className="navbar-link" to="/products" >Produtos</Nav.Link>
           <Nav.Link as={Link} className="navbar-link" to="/stores">Lojas</Nav.Link>
           <Nav.Link as={Link} className="navbar-link" to="/contacts">Contatos</Nav.Link>
-          <NavDropdown title={username != "" ? username:'Login' }>
-            {username == "" &&
+          <NavDropdown title={username !== "" ? username:'Login' }>
+            {username === "" &&
               <div className="show">
                 <Login changeName={setUserName} changeToken={setToken}/>
               </div>

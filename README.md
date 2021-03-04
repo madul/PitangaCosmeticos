@@ -2,7 +2,7 @@
 
 Web site de loja comercial de cosméticos fictícia com o intuito de praticar linguagens de programação de tecnologia full-stack ensinadas pelo curso Recode-Pro 2020.
 
-Até **20/01/21**, foram desenvolvidas as linguagens:
+Até **01/03/21**, foram desenvolvidas as linguagens:
 
 - HTML 
 - CSS
@@ -15,7 +15,11 @@ Até **20/01/21**, foram desenvolvidas as linguagens:
 - Python (pasta mod-python nesse repositório -> [miscelanea-recodepro](https://github.com/madul/miscelanea-recodepro))
 - NoSQL
 - Redux
+- ReactNative
 
+
+
+☝🏾 - O trabalho de React Native são algumas telas frontend do e-commerce.
 
 ☝🏾 - Os arquivos do Banco de Dados utilizado nesse projeto pode ser encontrado em [ModuloBancoDados](https://github.com/madul/ModuloBancoDados)
 
